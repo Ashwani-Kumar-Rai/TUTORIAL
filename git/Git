@@ -1,0 +1,197 @@
+
+
+GIT : system for tracking changes in file  [[command line tool]]
+    -> it allows you to see changes over time ,undo and redo changes , make sure all the version of the files are save ,nothing is lost.
+    -> Git maintains a copy of every file in your project at any time .every time you modify any file in any way and you commit your changes ,git will track it 
+        and both versions are never lost .
+
+REPOSITORY : is simply a folder that get's tracked .
+
+COMMIT -> there is a newer version of one or multiple files . so with ever change , git maintains a trace of all files and you can easily switch between different    versions of each file .
+
+v1 -> v2 -> v3 [jump from any version to any version]
+
+v1 = landing + about
+v2 = langine 
+     you can revert from version 2 to version 1 
+
+
+
+PROBLEMS GIT HELPS TO SOLVE EASILY
+
+1> Retrieve colleagues's changes : using code added by team
+
+2> solving conflicts : two or more people change the same file at the same time . (git gives us a way to solve this conflicts)
+
+3> Working on Multiple project versions : if one guy is taking longer time to do his work , team can carry on working without waiting for him .
+    when he finished working , git provides a way for her to reintegrate her changes into the main project . 
+
+4> Never Loose any changes : 
+
+====================================================================================================================================================================
+
+
+GITHUB : is an online web-based hosting service for Git repositories that allows you to store your saved files and all their versions . [[Web based service]]
+    [GITHUB] is free for public use , paid for private repositories .
+
+Alternatives : GitLab,Bitbucket,sourceforge
+
+Git Repositories : Is simply a folder that Git Manages , It's a folder where we want to track file changes and have file versioning .
+
+    Git Repositories : on local computer -> FOLDER
+    Git Repositories : on GitHub Website -> LINK
+
+
+====================================================================================================================================================================
+
+GITCLONE : creates a local git managed project based on the link provided  
+    creates a local folder with the same names as the remote project .
+    it also initiates git in that folder and downloads the current state of the remote               project on our local computer .
+
+    
+
+   git remote -v : git will print out the remote repository link
+        origin	git@github.com:Ashwani-Kumar-Rai/gitCourse.git (fetch) 
+        origin	git@github.com:Ashwani-Kumar-Rai/gitCourse.git (push)
+
+
+This shows two main operations for which we require the remote repository 
+
+[PUSH] : (send from local repo to remote repo) this command intructs git to send the local changes to the remote repository
+    -> So we will work on our project locally ,when all changes are done , we want to send them to local repository on GITHUB so that team can access them .
+
+[FETCH] : (retrieve from remote repo to local repo)
+    -> we team make changes to certain files and uploads to GITHUB repository ,we want to access those changes .
+
+
+====================================================================================================================================================================
+COMMIT: a set of saved repository changes ,,, git makes snapshots of these changes we call it commit . a commit is never lost . 
+    -> a commit has a unique hash key ,it is a name of the commit 
+    -> A commit is always has the same hash key and the same changes (hash key : name of the commit),no matter it is in whoever's computers .
+        it always refrences the same changes with the same hash key
+ 
+
+echo Hello World > Readme.md
+git add .  # GIT ADD : adds all the files that we have changed to the staging area , DOT tells to add all the files that have changed .
+git commit -m "Initial commit" # GIT COMMIT : simply created a new commit 
+    -m is used to add a commemnt , IT IS USED TO SPECIFY WHAT THE PARTICULAR COMMIT ACHIEVES .
+
+
+GIT LOG : shows the list of commits in our project : is a powerfull command that gives us a lot of information about the status of the project .
+commit ae72901a08989a7139bcb727c8f94398a9157163 (HEAD -> master)
+Author: Ashwani-Kumar-Rai <ashwani.profession@gmail.com>
+Date:   Fri Apr 28 12:31:27 2023 +0530
+
+    Initial commit
+
+====================================================================================================================================================================
+STAGING : staging one or more files simply means marking them to be commited . sometimes we want only certain file changes to be commited not all .
+            in that case we can use the specific file names .this will only add file 2 file 4 to staging but leaves all other files untouched
+            whether they are modified or not .
+
+git add file2.txt file4.txt
+        now when we commit only the selected files will be part of the commit .
+
+git reset  : Once one or more files have been added to the staging we can start to create a commit . if at any point we decide we want to remove the file from the staging and mark it as untracked we use the command GIT RESET
+
+SUMMARY :
+Git add : adds one or more files to staging .
+Git reset : removes one or more files from staging .
+git status : gives an overview of staged and untracked files .
+git log : gives information about the commits in the current branch 
+
+====================================================================================================================================================================
+BRANCHES : - Branch is a series of commits that can be manipulated independently . 
+           - Git maintains master branch that in some sense the source of truth for the project .(meaning the code that is currently the most up to date) .
+           - Any commit on a branch ,can be the origin commit where the new branch can be initiated , at that point any commit on the master cannot be seen on the 
+                seen on the second branch ,any commit on second branch cannot affect the master branch .
+           - When the development of the feature is complete ,or at any arbitary point that we as developer choose when they merge two branches effectively 
+           -  bringing all commits of one branch to another branch (eg : feature branch will bring all the commits to the master branch )
+            
+
+git branch : displays available branch 
+git branch <branch name> :creates a new branch 
+git checkout <branch name> :switches to a different branch
+====================================================================================================================================================================
+CHECKING STATUS AND INSPECTING COMMITS :
+
+git show <commit hash> : gives us information about a specific commit , for that we want the hash value of the commit that we want to inspect.(get that from git log)
+    This command gives us all the changes to all the files that happened in that commit including new file creation and name changes .
+git show --names-only <hash>
+
+
+git reflog : it gives us information about all the changes that happened on the project including all comments an all branches .
+====================================================================================================================================================================
+PUSH  : In order to colaborate with other team members , we need to send our commits from (local repo to remote repo) so that team have access to them .
+PULL  : similarly , we need to retrieve commits that our team has made (from remote repo to local repo)
+
+
+git clone <repository link>
+git clone <repository link> newRepository
+git push
+git pull : to retrieve the commits  
+====================================================================================================================================================================
+UNDOING AND REDOING CHANGES :
+git revert <hash>: to create a new commit ,that undoes the changes of a certain commit .(save that file by :q)
+git reset <hash>: It resets the current branch to show only commands up to the one you indicate ,it means that all subsequent commits are disregarded .
+    two important modifiers for this commit 
+        git reset --soft <hash> : removes commits from history keep changes
+        git reset --hard <hash> : removes commits from history remove changes
+
+
+====================================================================================================================================================================
+MERGING BRANCHES : git merge featureBranch
+
+
+MAIN REASON FOR CREATING BRANCHES : ABLE TO MODIFY FILES WITHOUT IMPACTING THE PROJECT AND OTHER CONTRIBUTORS . once our work has been done we need to be able to    merge the branch back into the project so that it is integrated into the rest of the work .
+
+====================================================================================================================================================================
+PULL REQUESTS AND CODE REVIEWS :(PRs) : Any team larger than one developer should use pull requests . if they don't there is an issue with the project .
+    Pull requests are a way for one contributor to have a look at another contributor's code and give opinions and reviews and approve or reject  the change .
+    They also help solve merge conflicts 
+
+    PULL Requests are basically a request to merge a branch into another branch .
+    We could merge directly but it is often more useful to peer review changes before they merged .
+    
+git branch 
+git push -f
+git checkout featureBranch 
+git push -u origin featureBranch 
+git add .
+git commit -m "xyz "
+
+MERGE PULL REQUESTS BUTTON 
+    
+    We merged the two branches at the moment there is nothing to create a pull request from .
+
+
+==================================================================================================================================================================== 
+OTHER COMMANDS
+
+user -h to find out more about a specific command 
+eg : git remote -h
+
+
+Git init : creates a new local repository in a folder 
+git remote add : adds a new remote repository to the project 
+git diff sourceBranch targetBranch : shows the difference between two branches 
+git tag :creates a snapshor of the project at a certain time
+    when a branch is ready to be put into production ,we first create a tag with the version name so that it is always available for future reference .
+git stash : it moves the changes of the project into a stash
+    we can have multiple stashes with different unrelated changes and we can always pull the changes back for the stash into the current working environment .
+git stash pop : retrieves changes from the stack and reapply them 
+git rebase :  it takes the commit stuff have happened in the original branch and applies them into the current branch before the current changes .
+git clean : remove untracked files
+
+
+
+
+
+
+
+
+
+
+
+
+
